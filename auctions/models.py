@@ -43,8 +43,10 @@ class Listings(models.Model):
 
 
 class Bids(models.Model):
-    bidder = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="bid")
-    listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="bids")
+    bidder = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="bids")
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE, 
+                                related_name="bids")
     amount = models.DecimalField(decimal_places=2, max_digits=10)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -58,7 +60,7 @@ class Bids(models.Model):
 class Comments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     on_item = models.ForeignKey(
-        Listings, on_delete=models.SET_NULL, null=True, related_name="comment"
+        Listings, on_delete=models.SET_NULL, null=True, related_name="comments"
     )
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
