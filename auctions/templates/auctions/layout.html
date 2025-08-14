@@ -14,7 +14,7 @@
 <body>
     <div class="nav-container">
         <div class="nav-heading">
-            <h3>💻BitBids</h3>
+            <h3>BitBids</h3>
         </div>
 
         <div class="nav-links">
@@ -30,18 +30,18 @@
                     <a class="nav-link" href="">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Create Listing</a>
+                    <a class="nav-link" href="{% url 'create-listing' %}">Create Listing</a>
                 </li>
                 {% endif %}
             </ul>
         </div>
         <div class="nav-usertools">
             {% if user.is_authenticated %}
-            <i class="bi bi-person-circle">{{ user.username }}</i>
+            <i class="bi bi-person-circle"> {{ user.username }}</i>
             <a href="{% url 'logout'%}" class="btn btn-danger">Log out</a>
             {% else %}
-            <a href="{% url 'login'%}" class="btn btn-outline-light">Log In</a>
-            <a href="{% url 'register'%}" class="btn btn-outline-light">Register</a>
+            <a href="{% url 'login'%}" class="btn btn-outline-dark">Log In</a>
+            <a href="{% url 'register'%}" class="btn btn-outline-dark">Register</a>
             {% endif %}
         </div>
 

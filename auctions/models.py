@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 """ Abstract user for additional user fields if i want to"""
 
 
@@ -12,7 +13,18 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=100)
+    CATEGORY_CHOICES = [
+        ('electronics', 'Electronics'),
+        ('fashion', 'Fashion'),
+        ('furniture', 'Furniture'),
+        ('books', 'Books'),
+        ('kitchen', 'Kitchen'),
+        ('sports', 'Sports & Outdoors'),
+        ('toys', 'Toys & Games'),
+        ('beauty', 'Beauty & Health'),
+    ]
+
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
 
     def __str__(self):
         return self.category

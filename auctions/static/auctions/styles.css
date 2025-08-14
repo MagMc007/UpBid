@@ -4,10 +4,11 @@ body {
 }
 
 .nav-container {
-    background-color: rgb(29, 22, 9);
+    background-color: rgb(231, 231, 230);
     height: 7vh;
     display: flex;
     padding: 0.5px;
+    border-bottom: 1px solid black;
 }
 
 .nav-heading {
@@ -35,11 +36,15 @@ body {
 }
 
 .bi {
-    color: white;
+    color: rgb(152, 50, 50);
     font-style: normal;
 }
 
 .nav-heading h3 {
-    color: white;
+    color: rgb(60, 52, 52);
     text-align: center;
+}
+
+.listing {
+    padding: 5px;
 }

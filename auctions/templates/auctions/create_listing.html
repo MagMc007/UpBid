@@ -1,5 +1,55 @@
 {% extends 'auctions/layout.html' %}
 {% block body %}
-{% csrf_token %}
-{{ form }}
+<header>
+    <h2>Create listing </h2>
+</header>
+<div class="listing container">
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {% if form.title.errors %}
+                <div class="text-danger">{{ form.title.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.starting_bid.label_tag }}
+                {{ form.starting_bid }}
+                {% if form.starting_bid.errors %}
+                <div class="text-danger">{{ form.starting_bid.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.image_url.label_tag }}
+                {{ form.image_url }}
+                {% if form.image_url.errors %}
+                <div class="text-danger">{{ form.image_url.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.category.label_tag }}
+                {{ form.category }} <!-- your dropdown will now appear -->
+                {% if form.category.errors %}
+                <div class="text-danger">{{ form.category.errors }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">List</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

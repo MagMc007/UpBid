@@ -1,5 +1,5 @@
 from django import forms
-from .models import Listings
+from .models import Listings, Category
 
 
 class ListingForm(forms.ModelForm):
@@ -7,5 +7,25 @@ class ListingForm(forms.ModelForm):
         model = Listings
         fields = ['title', 'description', 'starting_bid', 'image_url', 'category']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
+            'title': forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter title"
+            }),
+            'description': forms.Textarea(attrs={
+                'rows': 4,
+                "class": "form-control",
+                "placeholder": "Describe your listing..."
+            }),
+            'starting_bid': forms.NumberInput(attrs={
+                "class": "form-control",
+                "placeholder": "Starting bid"
+            }),
+            'image_url': forms.URLInput(attrs={
+                "class": "form-control",
+                "placeholder": "Image URL"
+            }),
+            'category': forms.Select(attrs={
+                "class": "form-select",
+            }),                                   
         }
+        
