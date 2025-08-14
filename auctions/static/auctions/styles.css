@@ -45,6 +45,10 @@ body {
     text-align: center;
 }
 
+.nav-heading a:hover {
+    text-decoration: none;
+}
+
 .listing {
     padding: 5px;
 }
