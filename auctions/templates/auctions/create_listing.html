@@ -3,7 +3,7 @@
 <header>
     <h2>Create listing </h2>
 </header>
-<div class="listing container">
+<div class="form-container listing">
     <div>
         <form action="" method="post">
             {% csrf_token %}
@@ -42,7 +42,7 @@
 
             <div class="mb-3">
                 {{ form.category.label_tag }}
-                {{ form.category }} <!-- your dropdown will now appear -->
+                {{ form.category }}
                 {% if form.category.errors %}
                 <div class="text-danger">{{ form.category.errors }}</div>
                 {% endif %}

@@ -4,11 +4,19 @@ body {
 }
 
 .nav-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
     background-color: rgb(231, 231, 230);
     height: 7vh;
     display: flex;
     padding: 0.5px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(82, 78, 78);
+}
+
+.navbar-spacer {
+    height: 10px;
 }
 
 .nav-heading {
@@ -49,6 +57,33 @@ body {
     text-decoration: none;
 }
 
-.listing {
+.form-container {
     padding: 5px;
 }
+
+
+/* for index */
+.listings-container {
+    padding: 5px;
+    display: flex;
+    border: 2px solid red;
+}
+
+.product-container {
+    height: 40vh;
+    width: 20vw;
+    border: 2px solid rgb(1, 68, 9);
+    margin: 2px;
+    padding: 2px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.info-container {}
+
+.price-container {}

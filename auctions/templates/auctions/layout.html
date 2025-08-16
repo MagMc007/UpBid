@@ -12,44 +12,45 @@
 </head>
 
 <body>
-    <div class="nav-container">
-        <div class="nav-heading">
-            <a href="{url 'index'}">
-                <h3>BitBids</h3>
-            </a>
-        </div>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-heading">
+                <a href="{url 'index'}">
+                    <h3>BitBids</h3>
+                </a>
+            </div>
 
-        <div class="nav-links">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-                </li>
+            <div class="nav-links">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Watchlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create-listing' %}">Create Listing</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="nav-usertools">
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="">Watchlist</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create-listing' %}">Create Listing</a>
-                </li>
+                <i class="bi bi-person-circle"> {{ user.username }}</i>
+                <a href="{% url 'logout'%}" class="btn btn-danger">Log out</a>
+                {% else %}
+                <a href="{% url 'login'%}" class="btn btn-outline-dark">Log In</a>
+                <a href="{% url 'register'%}" class="btn btn-outline-dark">Register</a>
                 {% endif %}
-            </ul>
+            </div>
         </div>
-        <div class="nav-usertools">
-            {% if user.is_authenticated %}
-            <i class="bi bi-person-circle"> {{ user.username }}</i>
-            <a href="{% url 'logout'%}" class="btn btn-danger">Log out</a>
-            {% else %}
-            <a href="{% url 'login'%}" class="btn btn-outline-dark">Log In</a>
-            <a href="{% url 'register'%}" class="btn btn-outline-dark">Register</a>
-            {% endif %}
-        </div>
+    </nav>
 
-
-    </div>
-
+    <div class="navbar-spacer"></div>
 
     {% block body %}
     {% endblock %}
