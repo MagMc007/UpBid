@@ -87,3 +87,14 @@ def create_listing(request):
                   {
                       "form": form,
                   })
+
+
+
+""" this makes user view detail of a listing """
+
+
+def detail_listing(request, pk):
+    listing = Listings.objects.get(pk=pk)
+    return render(request, "auctions/detail_view.html", {
+        "listing": listing
+    })

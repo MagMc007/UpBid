@@ -3,19 +3,20 @@
 {% block body %}
 <div class="listings-container">
     {% for listing in listings %}
-    <div class="product-container">
-        <div class="image-container">
-            <img src="{{ listing.image_url}}" alt="image for {{ listing.title}}">
-        </div>
-        <div class="info-container">
-            {{ listing.title}}
-            <div class="price-container">
-                ${{ listing.starting_bid }}
+    <a href="{% url 'detail-listing' listing.pk %}">
+        <div class="product-container">
+            <div class="image-container">
+                <img src="{{ listing.image_url}}" alt="image for {{ listing.title}}">
             </div>
-        </div>
+            <div class="info-container">
+                {{ listing.title}}
+                <div class="price-container">
+                    ${{ listing.starting_bid }}
+                </div>
+            </div>
 
-    </div>
+        </div>
+    </a>
     {% endfor %}
 </div>
-
 {% endblock %}
