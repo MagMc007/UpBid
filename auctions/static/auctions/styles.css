@@ -146,9 +146,7 @@ body {
     width: 70%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-left: 20px;
-
 }
 
 .product-title {
@@ -159,6 +157,7 @@ body {
     font-size: 24px;
     line-height: 32px;
     margin: 10px 0px 0px 0px;
+    padding-bottom: 10px;
 
 }
 
@@ -170,6 +169,8 @@ body {
     font-size: 15px;
     line-height: 32px;
     margin: -20px 0px 10px 0px;
+    padding-bottom: 20px;
+
 }
 
 .product-price {
@@ -179,30 +180,25 @@ body {
     font-size: 24px;
     line-height: 32px;
     margin: 10px 0px;
+
 }
 
-.bid-on {
-    display: inline-block;
-    align-self: flex-start;
-    background: lightblue;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
+.detail-tool-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.bid-on a {
-    text-decoration: none;
-    color: white;
+.bidding-form {
+    display: flex;
+    padding: 5px;
 }
 
-.bid-on:hover {
-    background-color: white;
+.product-comments {
+    padding: 5px;
 }
 
-.bid-on:hover a {
-    color: lightblue;
-}
-
-.bid-on:active {
-    border: 2px solid rgb(172, 168, 168);
+.create-comment form {
+    display: flex;
+    flex-direction: row;
 }

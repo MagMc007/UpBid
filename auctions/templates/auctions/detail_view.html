@@ -18,13 +18,33 @@
         <div class="product-price">
             Leading Bid: ${{ listing.starting_bid }}
         </div>
-        <a href="">
+
+        <div class="detail-tool-container">
             <div class="bid-on">
-                Comment >>
+                <form action="" class="bidding-form" method="post">
+                    {% csrf_token %}
+                    <input type="number" class="form-control" name="bid" placeholder="Bid here...">
+                    <button type="submit" class="btn btn-primary">Bid</button>
+                </form>
             </div>
-        </a>
+            <div class="watchlist">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Add to watchlist</button>
+                </form>
+            </div>
+        </div>
+
         <div class="product-comments">
-            No comments Yet
+            <div class="create-comment">
+                <form action="" method="post">
+                    <textarea class="form-control" rows="3" cols="25" placeholder="Your comments . . ."></textarea>
+                    <button type="submin" class="btn btn-primary">Comment</button>
+                </form>
+            </div>
+            <div class="view-comments">
+                No comments
+            </div>
         </div>
     </div>
 </div>
