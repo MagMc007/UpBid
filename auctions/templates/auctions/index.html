@@ -9,10 +9,11 @@
         </div>
         <div class="info-container">
             {{ listing.title}}
+            <div class="price-container">
+                ${{ listing.starting_bid }}
+            </div>
         </div>
-        <div class="price-container">
-            ${{ listing.starting_bid }}
-        </div>
+
     </div>
     {% endfor %}
 </div>
