@@ -10,6 +10,7 @@
     <div class="detail-info-container">
         <div class="product-title">
             {{ listing.title }}
+            <hr>
         </div>
         <div class="product-description">
             {{ listing.description }}
@@ -17,16 +18,14 @@
         <div class="product-price">
             Leading Bid: ${{ listing.starting_bid }}
         </div>
-        <div class="product-comments">
-            No comments Yet
-        </div>
         <a href="">
             <div class="bid-on">
                 Comment >>
             </div>
         </a>
-
-
+        <div class="product-comments">
+            No comments Yet
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -142,12 +142,13 @@ body {
 
 }
 
-
 .detail-info-container {
     width: 70%;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    justify-content: space-between;
+    padding-left: 20px;
+
 }
 
 .product-title {
@@ -157,19 +158,18 @@ body {
     font-weight: 500;
     font-size: 24px;
     line-height: 32px;
-    padding-left: 20px;
-    margin: 10px 0px;
+    margin: 10px 0px 0px 0px;
 
 }
 
 .product-description {
     width: 80%;
+    height: 150px;
     font-family: "DM Serif Text", serif;
     font-weight: 500;
     font-size: 15px;
-    line-heigh: 32px;
-    padding-left: 20px;
-    margin: 10px 0px;
+    line-height: 32px;
+    margin: -20px 0px 10px 0px;
 }
 
 .product-price {
@@ -178,7 +178,6 @@ body {
     font-weight: 500;
     font-size: 24px;
     line-height: 32px;
-    padding-left: 20px;
     margin: 10px 0px;
 }
 

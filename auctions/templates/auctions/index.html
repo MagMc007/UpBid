@@ -9,7 +9,7 @@
                 <img src="{{ listing.image_url}}" alt="image for {{ listing.title}}">
             </div>
             <div class="info-container">
-                {{ listing.title}}
+                {{ listing.title|truncatechars:20 }}
                 <div class="price-container">
                     ${{ listing.starting_bid }}
                 </div>
