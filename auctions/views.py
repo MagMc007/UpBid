@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from .forms import ListingForm
 from .models import User, Listings, WatchList
 from django.contrib.auth.decorators import login_required
@@ -94,19 +94,34 @@ def create_listing(request):
 
 def detail_listing(request, pk):
     listing = Listings.objects.get(pk=pk)
+    # for later watchlist purposes
+    in_watchlist = WatchList.objects.filter(user=request.user, listing=listing).exists()
     return render(request, "auctions/detail_view.html", {
-        "listing": listing
+        "listing": listing,
+        "in_watchlist": in_watchlist
     })
 
 """ implemets watchlisting """
 
 @login_required
-def add_to_watchlist(request, pk):
+def add_remove_watchlist(request, pk):
+    item = get_object_or_404(Listings, pk=pk)
+    
     if request.method == "POST":
-        user = request.user
-        item = Listings.objects.get(pk=pk)
-        WatchList.objects.get_or_create(user=user, listing=item)
-    return redirect("detail-watchlist")
+        action = request.POST.get("action")
+        
+        if action == "add":
+            WatchList.objects.get_or_create(user=request.user, listing=item)
+            return redirect("detail-listing", pk=pk)
+        
+        elif action == "remove":
+            WatchList.objects.filter(user=request.user, listing=item).delete()
+            return redirect("detail-listing", pk=pk)
+    
+    # If request is not POST or action is missing, just redirect back to listing
+    return redirect("detail-listing", pk=pk)
+
+   
 
 
 """ all watchlists of a user """

@@ -27,25 +27,29 @@
                     <button type="submit" class="btn btn-primary">Bid</button>
                 </form>
             </div>
-            <! Check if user has watchlisted the item or if user is the owner>
-                {% if listing.owner != request.user %}
-                {% if listing.watclisted_by.user == request.user %}
-                <div class="watchlist">
-                    <form action="{% url 'watch-list' listing.pk %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Add to watchlist</button>
-                    </form>
-                </div>
-                {% else %}
-                <div class="watchlist">
-                    <form action="{% url 'watch-list' listing.pk %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Remove from watch list</button>
-                    </form>
-                </div>
 
-                {% endif %}
-                {% endif %}
+            {% if listing.owner != request.user %}
+            {% if in_watchlist %}
+            <!-- Remove from watchlist -->
+            <div class="watchlist">
+                <form action="{% url 'watch-list' listing.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="remove">
+                    <button type="submit" class="btn btn-danger">Remove from watchlist</button>
+                </form>
+            </div>
+            {% else %}
+            <!-- Add to watchlist -->
+            <div class="watchlist">
+                <form action="{% url 'watch-list' listing.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add">
+                    <button type="submit" class="btn btn-primary">Add to watchlist</button>
+                </form>
+            </div>
+            {% endif %}
+            {% endif %}
+
 
         </div>
 
