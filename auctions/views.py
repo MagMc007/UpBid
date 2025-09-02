@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from .forms import ListingForm
-from .models import User, Listings, WatchList
+from .models import User, Listings, WatchList, Bids
 from django.contrib.auth.decorators import login_required
 
 
@@ -98,7 +98,8 @@ def detail_listing(request, pk):
     in_watchlist = WatchList.objects.filter(user=request.user, listing=listing).exists()
     return render(request, "auctions/detail_view.html", {
         "listing": listing,
-        "in_watchlist": in_watchlist
+        "in_watchlist": in_watchlist,
+        "message": None
     })
 
 """ implemets watchlisting """
@@ -148,3 +149,20 @@ def detail_watchlist(request):
         }
     )
 
+
+""" handles biddings coming from user """
+@login_required
+def bid_on(request, pk):
+    if request.method == "POST":
+        bidder = request.user
+        item = Listings.objects.get(pk=pk)
+        # get the amount from form
+        amount = float(request.POST.get("bid", "").strip())
+        if amount > item.starting_bid:
+            Bids.objects.get_or_create(bidder=bidder, listing=item)
+            message = "Bid successful!"
+        else:
+            message = "Bid higher!"
+
+
+        return redirect("detail-listing", pk=pk)

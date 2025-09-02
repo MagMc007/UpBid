@@ -20,35 +20,39 @@
         </div>
 
         <div class="detail-tool-container">
-            <div class="bid-on">
-                <form action="" class="bidding-form" method="post">
-                    {% csrf_token %}
-                    <input type="number" class="form-control" name="bid" placeholder="Bid here...">
-                    <button type="submit" class="btn btn-primary">Bid</button>
-                </form>
-            </div>
+            <! check if user is not owner and allow user to bid>
+                {% if request.user != listing.owner %}
+                <div class="bid-on">
+                    <form action="{% url 'bid-on' listing.pk %}" class="bidding-form" method="post">
+                        {% csrf_token %}
+                        <input type="number" class="form-control" name="bid" placeholder="Bid here...">
+                        <button type="submit" class="btn btn-primary">Bid</button>
+                    </form>
+                </div>
+                <div>
+                    {% message %}
+                </div>
 
-            {% if listing.owner != request.user %}
-            {% if in_watchlist %}
-            <!-- Remove from watchlist -->
-            <div class="watchlist">
-                <form action="{% url 'watch-list' listing.pk %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="remove">
-                    <button type="submit" class="btn btn-danger">Remove from watchlist</button>
-                </form>
-            </div>
-            {% else %}
-            <!-- Add to watchlist -->
-            <div class="watchlist">
-                <form action="{% url 'watch-list' listing.pk %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="add">
-                    <button type="submit" class="btn btn-primary">Add to watchlist</button>
-                </form>
-            </div>
-            {% endif %}
-            {% endif %}
+                {% if in_watchlist %}
+                <!-- Remove from watchlist -->
+                <div class="watchlist">
+                    <form action="{% url 'watch-list' listing.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="remove">
+                        <button type="submit" class="btn btn-danger">Remove from watchlist</button>
+                    </form>
+                </div>
+                {% else %}
+                <!-- Add to watchlist -->
+                <div class="watchlist">
+                    <form action="{% url 'watch-list' listing.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="add">
+                        <button type="submit" class="btn btn-primary">Add to watchlist</button>
+                    </form>
+                </div>
+                {% endif %}
+                {% endif %}
 
 
         </div>
