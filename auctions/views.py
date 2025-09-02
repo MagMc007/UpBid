@@ -181,9 +181,10 @@ def list_category(request):
 
 
 def detail_category_list(request, category):
-    listings = Listings.objects.filter(category=category, is_active=True)
+    category_id = get_object_or_404(Category, category=category).id
+    listings = Listings.objects.filter(category=category_id, is_active=True)
     return render(request, "auctions/detail_category_list.html",
                    {
-                       "listings":listings
+                       "listings": listings
             })
  
