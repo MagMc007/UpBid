@@ -27,17 +27,32 @@
                     <button type="submit" class="btn btn-primary">Bid</button>
                 </form>
             </div>
-            <div class="watchlist">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Add to watchlist</button>
-                </form>
-            </div>
+            <! Check if user has watchlisted the item or if user is the owner>
+                {% if listing.owner != request.user %}
+                {% if listing.watclisted_by.user == request.user %}
+                <div class="watchlist">
+                    <form action="{% url 'watch-list' listing.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Add to watchlist</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="watchlist">
+                    <form action="{% url 'watch-list' listing.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Remove from watch list</button>
+                    </form>
+                </div>
+
+                {% endif %}
+                {% endif %}
+
         </div>
 
         <div class="product-comments">
             <div class="create-comment">
                 <form action="" method="post">
+                    {% csrf_token %}
                     <textarea class="form-control" rows="3" cols="25" placeholder="Your comments . . ."></textarea>
                     <button type="submin" class="btn btn-primary">Comment</button>
                 </form>

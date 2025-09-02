@@ -202,3 +202,20 @@ body {
     display: flex;
     flex-direction: row;
 }
+
+@media(max-width:920px) {
+    .product-title {
+        margin-top: 10px;
+        padding-bottom: 30px;
+
+    }
+
+    .product-description {
+        width: 100%;
+        line-height: 20px;
+        margin-bottom: 30px;
+    }
+
+}
+
+

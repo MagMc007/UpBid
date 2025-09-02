@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import redirect
 from .forms import ListingForm
-from .models import User, Listings
+from .models import User, Listings, WatchList
 from django.contrib.auth.decorators import login_required
 
 
@@ -92,9 +92,44 @@ def create_listing(request):
 
 """ this makes user view detail of a listing """
 
-
 def detail_listing(request, pk):
     listing = Listings.objects.get(pk=pk)
     return render(request, "auctions/detail_view.html", {
         "listing": listing
     })
+
+""" implemets watchlisting """
+
+@login_required
+def add_to_watchlist(request, pk):
+    if request.method == "POST":
+        user = request.user
+        item = Listings.objects.get(pk=pk)
+        WatchList.objects.get_or_create(user=user, listing=item)
+    return redirect("detail-watchlist")
+
+
+""" all watchlists of a user """
+
+
+@login_required
+def detail_watchlist(request):
+    watchlist_items = WatchList.objects.filter(
+        user=request.user
+    )
+    # store all the watchlisted listings in this array
+    listings = []
+
+    for item in watchlist_items:
+        listings.append(
+            item.listing
+        )
+
+    return render(
+        request, 
+        "auctions/watchlist.html",
+        {
+            "listings":listings
+        }
+    )
+
