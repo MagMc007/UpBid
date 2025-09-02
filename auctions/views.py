@@ -175,3 +175,15 @@ def list_category(request):
     return render(request, "auctions/category.html", {
         "categories": categories
     })
+
+
+""" display all the listing falling under the same category """
+
+
+def detail_category_list(request, category):
+    listings = Listings.objects.filter(category=category, is_active=True)
+    return render(request, "auctions/detail_category_list.html",
+                   {
+                       "listings":listings
+            })
+ 
