@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from .forms import ListingForm
-from .models import User, Listings, WatchList, Bids
+from .models import User, Listings, WatchList, Bids, Category
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -165,3 +165,26 @@ def bid_on(request, pk):
         else:
             messages.error(request, "Bid higher!")
         return redirect("detail-listing", pk=pk)
+    
+
+""" implement category logic """
+
+
+def list_category(request):
+    categories = Category.objects.all()
+    return render(request, "auctions/category.html", {
+        "categories": categories
+    })
+
+
+""" display all the listing falling under the same category """
+
+
+def detail_category_list(request, category):
+    category_id = get_object_or_404(Category, category=category).id
+    listings = Listings.objects.filter(category=category_id, is_active=True)
+    return render(request, "auctions/detail_category_list.html",
+                   {
+                       "listings": listings
+            })
+ 
