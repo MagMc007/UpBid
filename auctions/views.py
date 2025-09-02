@@ -169,6 +169,7 @@ def bid_on(request, pk):
 
 """ implement category logic """
 
+
 def list_category(request):
     categories = Category.objects.all()
     return render(request, "auctions/category.html", {
