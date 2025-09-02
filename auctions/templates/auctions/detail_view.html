@@ -18,6 +18,21 @@
         <div class="product-price">
             Leading Bid: ${{ listing.starting_bid }}
         </div>
+        <div class="messages-container">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% else %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
 
         <div class="detail-tool-container">
             <! check if user is not owner and allow user to bid>
@@ -29,9 +44,7 @@
                         <button type="submit" class="btn btn-primary">Bid</button>
                     </form>
                 </div>
-                <div>
-                    {% message %}
-                </div>
+
 
                 {% if in_watchlist %}
                 <!-- Remove from watchlist -->
