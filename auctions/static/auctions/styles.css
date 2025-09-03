@@ -92,6 +92,7 @@ body {
     z-index: 20;
 }
 
+
 .product-container:hover {
     box-shadow: 0px 0px 5px rgb(157, 154, 154);
 
@@ -151,6 +152,7 @@ body {
     padding-left: 20px;
 }
 
+
 .product-title {
     width: 100%;
     margin-top: 50px;
@@ -161,6 +163,12 @@ body {
     margin: 10px 0px 0px 0px;
     padding-bottom: 10px;
 
+}
+
+.product-owner {
+    font-family: "DM Serif Text", serif;
+    font-weight: 100;
+    font-size: 15px;
 }
 
 .product-description {

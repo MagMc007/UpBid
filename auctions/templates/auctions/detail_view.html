@@ -11,16 +11,21 @@
         <div class="product-title">
             {{ listing.title }}
             <hr>
+
         </div>
+
         <div class="product-description">
             {{ listing.description }}
         </div>
+        <div class="product-owner">
+            <b> Owner:</b> {{ listing.owner }}
+        </div>
         {% if not listing.is_active %}
         <div class="alert alert-warning" role="alert">
-            Biddings Closed
+            Bidding Closed
         </div>
         {% endif %}
-        
+
         <div class="product-price">
             Leading Bid: ${{ listing.starting_bid }}
             <! if user is owner show him close bid button>
@@ -34,6 +39,14 @@
                 {% endif %}
 
         </div>
+
+        {% if listing.winner %}
+        <div class="alert alert-info" role="alert">
+            Item won by {{ listing.winner }}.
+        </div>
+        {% endif %}
+
+
         <div class="messages-container">
             {% if messages %}
             {% for message in messages %}
@@ -52,7 +65,7 @@
 
         <div class="detail-tool-container">
             <! check if user is not owner and allow user to bid>
-                {% if request.user != listing.owner %}
+                {% if request.user != listing.owner and listing.is_active %}
                 <div class="bid-on">
                     <form action="{% url 'bid-on' listing.pk %}" class="bidding-form" method="post">
                         {% csrf_token %}
