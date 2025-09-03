@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from .forms import ListingForm
-from .models import User, Listings, WatchList, Bids, Category
+from .models import User, Listings, WatchList, Bids, Category, Comments
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -104,10 +104,15 @@ def detail_listing(request, pk):
         return redirect("login")
     # for later watchlist purposes
     in_watchlist = WatchList.objects.filter(user=request.user, listing=listing).exists()
+    # for the comments
+    comments = Comments.objects.filter(on_item=pk)
     return render(
         request,
         "auctions/detail_view.html",
-        {"listing": listing, "in_watchlist": in_watchlist},
+        {"listing": listing, 
+         "in_watchlist": in_watchlist,
+         "comments":comments
+         },
     )
 
 
@@ -162,9 +167,9 @@ def bid_on(request, pk):
             Bids.objects.get_or_create(bidder=bidder, listing=item, amount=amount)
             item.starting_bid = amount
             item.save()
-            messages.success(request, "Bid successful!")
+            messages.success(request, "👍 Bid successful!")
         else:
-            messages.error(request, "Bid higher!")
+            messages.error(request, "☠️ Bid higher!")
         return redirect("detail-listing", pk=pk)
 
 
@@ -185,4 +190,17 @@ def detail_category_list(request, category):
     return render(request, "auctions/detail_category_list.html", {"listings": listings})
 
 
-"""" imlements comments from users on product """
+"""" implements comments from users on product """
+
+
+def comment_on(request, pk):
+    if request.method == "POST":
+        listing = get_object_or_404(Listings, pk=pk)
+        content = request.POST.get("comment", "").strip()
+        if content:
+            Comments.objects.create(
+                author=request.user,
+                on_item=listing, 
+                content=content)
+        return redirect("detail-listing", pk=pk)
+    

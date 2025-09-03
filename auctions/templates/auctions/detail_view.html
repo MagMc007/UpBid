@@ -69,19 +69,24 @@
 
 
         </div>
-
-        <div class="product-comments">
-            <div class="create-comment">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <textarea class="form-control" rows="3" cols="25" placeholder="Your comments . . ."></textarea>
-                    <button type="submin" class="btn btn-primary">Comment</button>
-                </form>
-            </div>
-            <div class="view-comments">
-                No comments
-            </div>
-        </div>
     </div>
+</div>
+
+<div class="product-comments">
+    <div class="create-comment">
+        <form action="{% url 'comment-on' listing.pk %}" method="post">
+            {% csrf_token %}
+            <textarea class="form-control" style="height: 35px" placeholder="Add your comments . . ."
+                name="comment"></textarea>
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+    </div>
+
+    {% for comment in comments %}
+    <div class="view-comments">
+        <div class="comment-credit"><b>{{ comment.author }}</b> on {{ comment.timestamp }}</div>
+        <div class="comment-content"> {{ comment.content }} </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
