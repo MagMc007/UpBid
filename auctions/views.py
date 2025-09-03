@@ -217,5 +217,16 @@ def close_bid(request, pk):
         highest_bid = Bids.objects.filter(listing=item).order_by('-amount').first()
         if highest_bid:    
             item.winner =  highest_bid.bidder
+            item.winner.has_notifications = True
         item.save()
         return redirect("detail-listing", pk=pk)
+
+
+""" profile page view """
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+
+    return render(request, "auctions/profile.html", {
+        "user":user
+    })

@@ -44,8 +44,9 @@
             <div class="nav-usertools">
                 {% if user.is_authenticated %}
                 <div class="profile">
-                    <a href=""><i class="bi bi-person-circle"> {{ user.username }}</i></a>
-                    <div class="notifications"></div>
+                    <a href="{% url 'profile' user.username %}">
+                        <i class="bi bi-person-circle"> {{ user.username}}</i></a>
+                    <div class="notifications">!</div>
                 </div>
 
                 <a href="{% url 'logout'%}" class="btn btn-danger">Log out</a>

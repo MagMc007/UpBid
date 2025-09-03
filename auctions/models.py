@@ -6,6 +6,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    has_notifications = models.BooleanField(default=False)
     pass
 
 
