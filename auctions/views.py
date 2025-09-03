@@ -213,7 +213,9 @@ def close_bid(request, pk):
     if request.method == "POST":
         item = Listings.objects.get(pk=pk)
         item.is_active = False
-        item.save()
         # winner logic 
-        
+        highest_bid = Bids.objects.filter(listing=item).order_by('-amount').first()
+        if highest_bid:    
+            item.winner =  highest_bid.bidder
+        item.save()
         return redirect("detail-listing", pk=pk)
