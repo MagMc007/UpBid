@@ -50,6 +50,27 @@ body {
     font-style: normal;
 }
 
+.profile {
+    position: relative;
+    margin-right: 5px;
+}
+
+.nav-usertools a {
+    text-decoration: none;
+}
+
+.notifications {
+    position: absolute;
+    right: -10px;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: rgb(154, 90, 90);
+}
+
+
+
 .nav-heading h3 {
     color: rgb(60, 52, 52);
     text-align: center;
