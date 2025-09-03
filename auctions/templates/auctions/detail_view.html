@@ -15,8 +15,24 @@
         <div class="product-description">
             {{ listing.description }}
         </div>
+        {% if not listing.is_active %}
+        <div class="alert alert-warning" role="alert">
+            Biddings Closed
+        </div>
+        {% endif %}
+        
         <div class="product-price">
             Leading Bid: ${{ listing.starting_bid }}
+            <! if user is owner show him close bid button>
+                {% if listing.owner == request.user and listing.is_active %}
+                <form action="{% url 'close-bid' listing.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        Close bid
+                    </button>
+                </form>
+                {% endif %}
+
         </div>
         <div class="messages-container">
             {% if messages %}

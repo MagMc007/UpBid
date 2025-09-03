@@ -204,3 +204,16 @@ def comment_on(request, pk):
                 content=content)
         return redirect("detail-listing", pk=pk)
     
+
+
+""" winner and close bid logic """
+
+
+def close_bid(request, pk):
+    if request.method == "POST":
+        item = Listings.objects.get(pk=pk)
+        item.is_active = False
+        item.save()
+        # winner logic 
+        
+        return redirect("detail-listing", pk=pk)
