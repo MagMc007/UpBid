@@ -271,3 +271,68 @@ body {
     }
 
 }
+
+
+/*############### PROFILE ########################*/
+.items-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.item-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.item-image {
+    flex: 0 0 100px;
+    height: 100px;
+    margin-right: 15px;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h3 {
+    margin: 0;
+}
+
+.item-details p {
+    margin: 3px 0;
+    color: #555;
+}
+
+.item-flag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.won-flag {
+    background: #d4f7d0;
+    color: #2d7a2d;
+}
+
+.lost-flag {
+    background: #f7d0d0;
+    color: #a12d2d;
+}

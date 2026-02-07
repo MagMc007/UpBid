@@ -74,9 +74,8 @@
                     </form>
                 </div>
 
-
+                {% endif %}
                 {% if in_watchlist %}
-                <!-- Remove from watchlist -->
                 <div class="watchlist">
                     <form action="{% url 'watch-list' listing.pk %}" method="post">
                         {% csrf_token %}
@@ -84,8 +83,7 @@
                         <button type="submit" class="btn btn-danger">Remove from watchlist</button>
                     </form>
                 </div>
-                {% else %}
-                <!-- Add to watchlist -->
+                {% elif listing.is_active and listing.owner != user %}
                 <div class="watchlist">
                     <form action="{% url 'watch-list' listing.pk %}" method="post">
                         {% csrf_token %}
@@ -94,8 +92,6 @@
                     </form>
                 </div>
                 {% endif %}
-                {% endif %}
-
 
         </div>
     </div>

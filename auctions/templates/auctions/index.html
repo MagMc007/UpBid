@@ -1,5 +1,5 @@
 {% extends "auctions/layout.html" %}
-
+{% block title %}Active listings {% endblock %}
 {% block body %}
 <div class="listings-container">
     {% for listing in listings %}
@@ -14,7 +14,6 @@
                     ${{ listing.starting_bid }}
                 </div>
             </div>
-
         </div>
     </a>
     {% endfor %}

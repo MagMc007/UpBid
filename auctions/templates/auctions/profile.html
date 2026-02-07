@@ -7,5 +7,52 @@
 
 
 {% block body %}
-<h1>{{user.username}}</h1>
+
+<!-- WON LISTINGS -->
+<div class="items-section">
+    {% for listing in won_items %}
+    <a href="{% url 'detail-listing' listing.pk %}">
+        <div class="item-card">
+            <!-- Image -->
+            <div class="item-image">
+                <img src="{{ listing.image_url }}" alt="Image for {{ listing.title }}">
+            </div>
+
+            <!-- Info -->
+            <div class="item-details">
+                <h3>{{ listing.title|truncatechars:30 }}</h3>
+                <p>Winner: {{ listing.winner.username }}</p>
+                <span class="item-flag won-flag">Won</span>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <p>No items won yet.</p>
+    {% endfor %}
+</div>
+
+<!-- LOST LISTINGS -->
+<div class="items-section">
+    {% for listing in lost_items %}
+    <a href="{% url 'detail-listing' listing.pk %}">
+        <div class="item-card">
+            <!-- Image -->
+            <div class="item-image">
+                <img src="{{ listing.image_url }}" alt="Image for {{ listing.title }}">
+            </div>
+
+            <!-- Info -->
+            <div class="item-details">
+                <h3>{{ listing.title|truncatechars:30 }}</h3>
+                <p>Winner: {{ listing.winner.username }}</p>
+                <span class="item-flag lost-flag">Lost</span>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <p>No items lost yet.</p>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

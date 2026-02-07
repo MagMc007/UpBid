@@ -8,6 +8,7 @@ from .forms import ListingForm
 from .models import User, Listings, WatchList, Bids, Category, Comments
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 
 def index(request):
@@ -187,7 +188,7 @@ def list_category(request):
 def detail_category_list(request, category):
     category_id = get_object_or_404(Category, category=category).id
     listings = Listings.objects.filter(category=category_id, is_active=True)
-    return render(request, "auctions/detail_category_list.html", {"listings": listings})
+    return render(request, "auctions/detail_category_list.html", {"listings": listings, "category":category})
 
 
 """" implements comments from users on product """
@@ -215,18 +216,42 @@ def close_bid(request, pk):
         item.is_active = False
         # winner logic 
         highest_bid = Bids.objects.filter(listing=item).order_by('-amount').first()
-        if highest_bid:    
-            item.winner =  highest_bid.bidder
-            item.winner.has_notifications = True
+        if highest_bid:
+            winner_user = highest_bid.bidder
+            item.winner = winner_user
+
+            # Notify winner
+            winner_user.has_notifications = True
+            winner_user.save()
+
+            # Notify losers
+            losers = Bids.objects.filter(listing=item).exclude(bidder=winner_user)\
+                    .values_list('bidder', flat=True).distinct()
+            User = get_user_model()
+            User.objects.filter(id__in=losers).update(has_notifications=True)
+
         item.save()
         return redirect("detail-listing", pk=pk)
 
 
 """ profile page view """
 
+
 def profile(request, username):
     user = User.objects.get(username=username)
+    user.has_notifications = False
+    user.save()
+    # items user won
+    items_won = Listings.objects.filter(winner=user)
+    # Items the user bid on but did not win
+
+    lost_items = Listings.objects.filter(
+        bids__bidder=user,     # user placed a bid on
+        is_active=False        # auction is closed and user lost
+    ).exclude(winner=user).distinct()
 
     return render(request, "auctions/profile.html", {
-        "user":user
+        "profile_user": user,
+        "won_items": items_won,
+        "lost_items": lost_items
     })

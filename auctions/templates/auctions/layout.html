@@ -19,7 +19,7 @@
         <div class="nav-container">
             <div class="nav-heading">
                 <a href="{% url 'index' %}">
-                    <h3>BitBids</h3>
+                    <h3>UpBid</h3>
                 </a>
             </div>
 
@@ -46,7 +46,9 @@
                 <div class="profile">
                     <a href="{% url 'profile' user.username %}">
                         <i class="bi bi-person-circle"> {{ user.username}}</i></a>
+                    {% if user.has_notifications %}
                     <div class="notifications">!</div>
+                    {% endif %}
                 </div>
 
                 <a href="{% url 'logout'%}" class="btn btn-danger">Log out</a>
